@@ -1,7 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Clasificador de Insectos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Materialize CSS (Material Design estilo MUI sin React) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+  <!-- Google Fonts para estilo más atractivo -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      padding: 2rem;
+      background: #f3f4f6;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .center-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #resultado {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+
   <script>
     function clasificarInsecto(event) {
       event.preventDefault();
@@ -17,30 +54,47 @@
       })
       .then(response => response.json())
       .then(data => {
+        const resultado = document.getElementById('resultado');
         if (data.error) {
-          document.getElementById('resultado').innerText = 'Error: ' + data.error;
+          resultado.innerText = '❌ Error: ' + data.error;
+          resultado.style.color = 'red';
         } else {
-          document.getElementById('resultado').innerText = 'El insecto es un/a ' + data.categoria;
+          resultado.innerText = '✅ El insecto es un/a ' + data.categoria;
+          resultado.style.color = 'green';
         }
       })
       .catch(error => {
-        document.getElementById('resultado').innerText = 'Error en la solicitud.';
+        document.getElementById('resultado').innerText = '❌ Error en la solicitud.';
         console.error('Error:', error);
       });
     }
   </script>
 </head>
+
 <body>
-  <h1>Clasificador de Insectos</h1>
-  <form id="formulario" onsubmit="clasificarInsecto(event)">
-    <label for="abdomen">Longitud del Abdomen:</label>
-    <input type="text" id="abdomen" name="abdomen"><br><br>
+  <div class="container z-depth-2">
+    <h4 class="center-title">Clasificador de Insectos</h4>
+    <form id="formulario" onsubmit="clasificarInsecto(event)">
+      <div class="input-field">
+        <input type="number" id="abdomen" name="abdomen" required>
+        <label for="abdomen">Longitud del Abdomen</label>
+      </div>
 
-    <label for="antena">Longitud de las Antenas:</label>
-    <input type="text" id="antena" name="antena"><br><br>
+      <div class="input-field">
+        <input type="number" id="antena" name="antena" required>
+        <label for="antena">Longitud de las Antenas</label>
+      </div>
 
-    <input type="submit" value="Enviar">
-  </form>
-  <p id="resultado"></p>
+      <div class="center">
+        <button class="btn waves-effect waves-light" type="submit">
+          Clasificar <i class="material-icons right">bug_report</i>
+        </button>
+      </div>
+    </form>
+    <p id="resultado"></p>
+  </div>
+
+  <!-- Materialize JS y dependencias -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
