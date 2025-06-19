@@ -5,10 +5,8 @@
   <title>Clasificador de Insectos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Materialize CSS (Material Design estilo MUI sin React) -->
+  <!-- Materialize CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-
-  <!-- Google Fonts para estilo más atractivo -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
@@ -76,12 +74,12 @@
     <h4 class="center-title">Clasificador de Insectos</h4>
     <form id="formulario" onsubmit="clasificarInsecto(event)">
       <div class="input-field">
-        <input type="number" id="abdomen" name="abdomen" required>
+        <input type="number" id="abdomen" name="abdomen" required step="any">
         <label for="abdomen">Longitud del Abdomen</label>
       </div>
 
       <div class="input-field">
-        <input type="number" id="antena" name="antena" required>
+        <input type="number" id="antena" name="antena" required step="any">
         <label for="antena">Longitud de las Antenas</label>
       </div>
 
@@ -94,7 +92,7 @@
     <p id="resultado"></p>
   </div>
 
-  <!-- Materialize JS y dependencias -->
+  <!-- Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
